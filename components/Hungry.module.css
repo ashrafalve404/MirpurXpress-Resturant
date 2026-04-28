@@ -22,14 +22,14 @@
 .riderImage {
   width: 100%;
   height: auto;
-  max-width: 500px;
+  max-width: 400px;
   animation: drive 10s linear infinite;
 }
 
 @keyframes drive {
-  0% { transform: translateX(-10px); }
-  50% { transform: translateX(10px); }
-  100% { transform: translateX(-10px); }
+  0% { transform: translateX(-10px) scaleX(-1); }
+  50% { transform: translateX(10px) scaleX(-1); }
+  100% { transform: translateX(-10px) scaleX(-1); }
 }
 
 .content {

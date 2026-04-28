@@ -8,7 +8,7 @@ export default function Hungry() {
       <div className={styles.container}>
         <div className={styles.imageBox}>
             <Image 
-              src="/assets/delivery.png" 
+              src="/assets/pngtree-a-delivery-rider-on-an-electric-bike-illustration-png-image_16843688.webp" 
               alt="Delivery Rider" 
               width={500} 
               height={400} 

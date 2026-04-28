@@ -1,6 +1,6 @@
 import styles from './Hero.module.css';
 import Image from 'next/image';
-import { HiSparkles, HiLocationMarker } from 'react-icons/hi';
+import { HiLocationMarker } from 'react-icons/hi';
 
 export default function Hero() {
   return (
@@ -8,8 +8,8 @@ export default function Hero() {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.badge}>
+            <Image src="/assets/icon/splash.png" alt="Splash Icon" width={25} height={25} />
             <span className={styles.bengali}>খাঁটি স্বাদ, ঘরের মতো খাবার</span>
-            <span className={styles.badgeIcon}><HiSparkles /></span>
           </div>
           
           <h1 className={styles.title}>
