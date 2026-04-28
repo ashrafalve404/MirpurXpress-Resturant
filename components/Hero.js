@@ -1,5 +1,6 @@
 import styles from './Hero.module.css';
 import Image from 'next/image';
+import Link from 'next/link';
 import { HiLocationMarker } from 'react-icons/hi';
 
 export default function Hero() {
@@ -8,7 +9,13 @@ export default function Hero() {
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.badge}>
-            <Image src="/assets/icon/splash.png" alt="Splash Icon" width={25} height={25} />
+            <Image 
+              src="/assets/icon/splash.png" 
+              alt="MirpurXpress Logo Icon" 
+              width={25} 
+              height={25} 
+              priority
+            />
             <span className={styles.bengali}>খাঁটি স্বাদ, ঘরের মতো খাবার</span>
           </div>
           
@@ -24,8 +31,8 @@ export default function Hero() {
           </p>
           
           <div className={styles.actions}>
-            <button className={styles.btnPrimary}>View Menu</button>
-            <button className={styles.btnSecondary}>Order Now</button>
+            <Link href="/menu" className={styles.btnPrimary}>View Menu</Link>
+            <Link href="/contact" className={styles.btnSecondary}>Order Now</Link>
           </div>
           
           <div className={styles.location}>

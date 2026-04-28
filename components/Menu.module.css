@@ -47,21 +47,35 @@
 }
 
 .tab {
-  padding: 10px 25px;
-  border-radius: 5px;
+  padding: 10px 20px;
+  border-radius: 50px;
   font-weight: 600;
   background: #f5f5f5;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
   font-family: var(--font-bengali);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tabIcon {
+  font-size: 16px;
 }
 
 .tab.active {
   background: var(--primary);
   color: #000;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 180, 0, 0.3);
 }
 
 .tab:hover:not(.active) {
-  background: #eee;
+  background: #ffe066;
+  transform: translateY(-1px);
 }
 
 .grid {
@@ -119,6 +133,11 @@
   border: none;
   cursor: pointer;
   z-index: 5;
+  transition: transform 0.2s;
+}
+
+.wishlistBtn:hover {
+  transform: scale(1.1);
 }
 
 .heartIcon {
@@ -129,6 +148,21 @@
 
 .wishlistBtn:hover .heartIcon {
   color: #ff4d4d;
+}
+
+.popularBadge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--primary);
+  color: #000;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 5;
 }
 
 .cardContent {

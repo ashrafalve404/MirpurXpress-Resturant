@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import styles from './PromoSlider.module.css';
 
@@ -17,29 +17,50 @@ const slides = [
     image: '/assets/bannerimages/turkish-stuffed-eggplants-with-ground-beef-vegetables-baked-with-tomato-sauce.jpg',
     badge: 'Chef\'s Special',
     title: 'Turkish Beef Delight',
-    description: 'টার্কিশ স্টাইল স্টাফড এগপ্ল্যান্ট উইথ বিফ - একটি রাজকীয় খাবারের স্বাদ নিতে আজই অর্ডার করুন।',
+    description: 'টার্কিশ স্টাইল স্টাফড এগপ্ল্যান্ট উইথ বিফ - একটি রাজকীয় খাবারের স্বাদ নitez today order.',
     offer: 'BUY 1 GET 1'
   }
 ];
 
 export default function PromoSlider() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const isPausedRef = useRef(isPaused);
+  const intervalRef = useRef(null);
+
+  // Keep ref in sync with state
+  useEffect(() => {
+    isPausedRef.current = isPaused;
+  }, [isPaused]);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    intervalRef.current = setInterval(() => {
+      if (!isPausedRef.current) {
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+      }
     }, 5000);
-    return () => clearInterval(timer);
-  }, []);
+
+    return () => clearInterval(intervalRef.current);
+  }, []); // Only set interval once on mount
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
 
   return (
-    <section className={styles.promoSection}>
+    <section 
+      className={styles.promoSection}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      aria-label="Promotional offers slider"
+    >
       <div className={styles.container}>
         <div className={styles.sliderWrapper}>
           {slides.map((slide, index) => (
             <div
               key={slide.id}
               className={`${styles.slide} ${index === currentSlide ? styles.slideActive : ''}`}
+              aria-hidden={index !== currentSlide}
             >
               <Image
                 src={slide.image}
@@ -47,23 +68,31 @@ export default function PromoSlider() {
                 fill
                 className={styles.image}
                 priority={index === 0}
+                sizes="100vw"
+                quality={85}
               />
               <div className={styles.overlay} />
               <div className={styles.content}>
                 <span className={styles.badge}>{slide.badge}</span>
-                <h2 className={styles.title}>{slide.title} <br /> <span style={{color: 'var(--primary)'}}>{slide.offer}</span></h2>
+                <h2 className={styles.title}>
+                  {slide.title} <br />
+                  <span style={{ color: 'var(--primary)' }}>{slide.offer}</span>
+                </h2>
                 <p className={styles.description}>{slide.description}</p>
                 <button className={styles.btn}>Order Now</button>
               </div>
             </div>
           ))}
 
-          <div className={styles.dots}>
+          <div className={styles.dots} role="tablist" aria-label="Slide navigation">
             {slides.map((_, index) => (
-              <div
+              <button
                 key={index}
                 className={`${styles.dot} ${index === currentSlide ? styles.dotActive : ''}`}
-                onClick={() => setCurrentSlide(index)}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+                aria-selected={index === currentSlide}
+                role="tab"
               />
             ))}
           </div>

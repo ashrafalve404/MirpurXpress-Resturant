@@ -16,7 +16,7 @@ export default function Header() {
   };
 
   return (
-    <header className={styles.header}>
+    <header className={styles.header} role="banner">
       <div className={styles.container}>
         <div className={styles.logo}>
           <div className={styles.logoIcon}>🥘</div>
@@ -26,24 +26,33 @@ export default function Header() {
           </div>
         </div>
         
-        <nav className={`${styles.nav} ${isMobileMenuOpen ? styles.navOpen : ''}`}>
-          <Link href="#home" onClick={closeMobileMenu}>Home</Link>
-          <Link href="#about" onClick={closeMobileMenu}>About Us</Link>
-          <Link href="#menu" onClick={closeMobileMenu}>Menu</Link>
-          <Link href="#specials" onClick={closeMobileMenu}>Specials</Link>
-          <Link href="#gallery" onClick={closeMobileMenu}>Gallery</Link>
-          <Link href="#reviews" onClick={closeMobileMenu}>Reviews</Link>
-          <Link href="#contact" onClick={closeMobileMenu}>Contact</Link>
+        <nav 
+          className={`${styles.nav} ${isMobileMenuOpen ? styles.navOpen : ''}`}
+          role="navigation"
+          aria-label="Main navigation"
+        >
+          <Link href="/" onClick={closeMobileMenu} aria-current={isMobileMenuOpen ? undefined : 'page'}>Home</Link>
+          <Link href="/about" onClick={closeMobileMenu}>About Us</Link>
+          <Link href="/menu" onClick={closeMobileMenu}>Menu</Link>
+          <Link href="/specials" onClick={closeMobileMenu}>Specials</Link>
+          <Link href="/gallery" onClick={closeMobileMenu}>Gallery</Link>
+          <Link href="/reviews" onClick={closeMobileMenu}>Reviews</Link>
+          <Link href="/contact" onClick={closeMobileMenu}>Contact</Link>
         </nav>
         
         <div className={styles.contact}>
-          <button className={styles.phoneBtn}>
+          <a href="tel:+8801612345678" className={styles.phoneBtn}>
             <span className={styles.phoneIcon}><HiOutlinePhone /></span>
             <span className={styles.phoneText}>01612-345678</span>
-          </button>
+          </a>
           
-          <button className={styles.mobileMenuBtn} onClick={toggleMobileMenu}>
-            {isMobileMenuOpen ? <HiX /> : <HiMenu />}
+          <button 
+            className={styles.mobileMenuBtn} 
+            onClick={toggleMobileMenu}
+            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileMenuOpen}
+          >
+            {isMobileMenuOpen ? <HiX aria-hidden="true" /> : <HiMenu aria-hidden="true" />}
           </button>
         </div>
       </div>

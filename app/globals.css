@@ -28,6 +28,7 @@ body {
   font-family: var(--font-main);
   background-color: var(--bg-light);
   color: #333;
+  scroll-behavior: smooth;
 }
 
 h1, h2, h3, h4, h5, h6 {

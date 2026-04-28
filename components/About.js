@@ -44,11 +44,13 @@ export default function About() {
           <div className={styles.imageWrapper}>
             <Image 
               src="/assets/restaurant.png" 
-              alt="Restaurant Interior" 
+              alt="Restaurant Interior - MirpurXpress" 
               width={500} 
               height={400} 
               className={styles.aboutImage}
               style={{ height: 'auto' }}
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         </div>

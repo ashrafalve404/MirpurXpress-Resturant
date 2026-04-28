@@ -13,7 +13,6 @@ export default function Hungry() {
               width={500} 
               height={400} 
               className={styles.riderImage}
-              style={{ height: 'auto' }}
             />
         </div>
         
